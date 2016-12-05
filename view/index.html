@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sniplar</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div style="float:right">
+      <a title="restart" href="javascript:restartApp()"><i class="fa fa-bug" aria-hidden="true"></i></a>
+      <a title="settings" href="javascript:alert('test')"><i class="fa fa-cog" aria-hidden="true"></i></a>
+      <a title="hide" href="javascript:quitWindow()"><i class="fa fa-times" aria-hidden="true"></i></a>
+    </div>
+    <br />
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+
+    <script type="text/javascript" src="../src/navigation.js"></script>
+    <script type="text/javascript" src="../src/capture.js"></script>
+  </body>
+</html>

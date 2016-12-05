@@ -1,0 +1,20 @@
+{
+  "name"    : "Sniplar",
+  "version" : "0.1.0",
+  "authors": [
+    "Oliver <kokspflanze@protonmail.com>"
+  ],
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sniplar/sniplar.git"
+  },
+  "main"    : "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "menubar": "^5.1.0",
+    "menubar": "^5.1.0"
+  }
+}
