@@ -5,7 +5,7 @@ const url = require('url');
 const menubar = require('menubar');
 const electron = require('electron');
 const {app, globalShortcut, ipcMain} = electron;
-const addon = require('./../build/Release/addon')
+const addon = require('./../build/Release/addon.node')
 
 var opts = {
     dir: __dirname,
@@ -17,18 +17,19 @@ var opts = {
     width: 300
 };
 
+var mb = menubar(opts);
+
 app.on('ready', () => {
   globalShortcut.register('CmdOrCtrl+Insert', () => {
     let displays = electron.screen.getCursorScreenPoint();
 
     console.log('X:' + displays.x + ' Y:' + displays.y);
-    console.log(`native addon whoami: ${addon.WhoAmI()}`);
     console.log(`screencall: ${addon.CaptureScreen()}`);
   });
 
 });
 
-var mb = menubar(opts);
+
 mb.on('ready', function ready () {
     mb.on('show', function show () {
         mb.window.webContents.send("show");

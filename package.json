@@ -14,15 +14,16 @@
     "start": "electron-rebuild && electron .",
     "gyp": "node-gyp configure build",
     "rebuild": "electron-rebuild -f -w .",
-    "postinstall": "./node_modules/.bin/electron-rebuild"
+    "postinstall": "./node_modules/.bin/electron-rebuild --force"
   },
   "dependencies": {
     "menubar": "^5.2.3",
-    "electron": "^1.6.2",
+    "electron": "^1.7.3",
     "font-awesome": "^4.7.0",
     "nan": "^2.6.2"
   },
   "devDependencies": {
-    "electron-rebuild": "^1.5.7"
+    "electron-rebuild": "^1.5.11",
+    "node-gyp": "^3.6.2"
   }
 }
