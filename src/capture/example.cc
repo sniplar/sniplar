@@ -1,19 +1,19 @@
 #include <nan.h>
 #include <windows.h>
-
-using namespace std;
+#include <iostream>
 
 const char selectionWindowClassName[] = "selection_window";
-HINSTANCE globalInstance;
+HINSTANCE globalInstance = NULL;
+BOOL wndClassRegistered = false;
 
-RECT clientRect { 0, 0, 0, 0 };
-POINTS selectionBegin { 0, 0 };
-POINTS selectionEnd { 0, 0 };
-RECT screenshotRect { 0, 0, 0,0 };
+RECT clientRect;
+POINTS selectionBegin;
+POINTS selectionEnd;
+RECT screenshotRect;
 
-COLORREF bgColor = RGB(255, 255, 255);
-COLORREF selColor = RGB(255, 0, 255);
-COLORREF frameColor = RGB(255, 0, 0);
+const COLORREF bgColor = RGB(255, 255, 255);
+const COLORREF selColor = RGB(255, 0, 255);
+const COLORREF frameColor = RGB(255, 0, 0);
 
 HBRUSH backgroundBrush;
 HBRUSH selectionBrush;
@@ -112,8 +112,7 @@ static void selectionWndEndRubberBand(HWND hwnd, WPARAM wParam, LPARAM lParam)
 	SetRect(&screenshotRect, topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
 
 	// Close the window, exit message loop
-	CloseWindow(hwnd);
-	PostQuitMessage(0);
+	DestroyWindow(hwnd);
 }
 
 static void selectionWndMouseMove(HWND hwnd, WPARAM wParam, LPARAM lParam)
@@ -141,12 +140,9 @@ static LRESULT CALLBACK selectionWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPA
 		return 1;
 	case WM_CHAR:
 		if (wParam == 0x1B /* Escape */) {
-			PostQuitMessage(0);
+			DestroyWindow(hwnd);
 			return 1;
 		}
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 1;
 	}
 
 	return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -174,7 +170,7 @@ static HWND createSelectionWindow()
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-	HWND wnd = CreateWindowEx(WS_EX_TOPMOST|WS_EX_LAYERED, selectionWindowClassName, "Selection Window", WS_POPUP, 0, 0, screenWidth, screenHeight, NULL, NULL, globalInstance, NULL);
+	HWND wnd = CreateWindowEx(WS_EX_TOPMOST|WS_EX_LAYERED|WS_EX_TOOLWINDOW, selectionWindowClassName, "Selection Window", WS_POPUP, 0, 0, screenWidth, screenHeight, NULL, NULL, globalInstance, NULL);
 	if (IsWindow(wnd)) {
 		SetLayeredWindowAttributes(wnd, selColor, 180 /* alpha 0..255 */, LWA_COLORKEY | LWA_ALPHA);
 	}
@@ -183,12 +179,21 @@ static HWND createSelectionWindow()
 }
 
 NAN_METHOD(CaptureScreen) {
-        globalInstance = GetModuleHandle(NULL);
+	if (!globalInstance) {
+	        globalInstance = GetModuleHandle(NULL);
+	}
 
 	// Register window class
-	if (!createWindowClass()) {
+	if (!wndClassRegistered && !(wndClassRegistered = createWindowClass())) {
+		std::cerr << "Erro registering window class!\n";
 		return;
 	}
+
+	// Init globals
+	clientRect = { 0, 0, 0, 0 };
+	selectionBegin = { 0, 0 };
+	selectionEnd = { 0, 0 };
+	screenshotRect = { 0, 0, 0,0 };
 
 	// Create brushes for drawing
 	backgroundBrush = CreateSolidBrush(bgColor);
