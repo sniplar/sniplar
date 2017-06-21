@@ -138,6 +138,9 @@ static LRESULT CALLBACK selectionWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPA
 	case WM_MOUSEMOVE:
 		selectionWndMouseMove(hwnd, wParam, lParam);
 		return 1;
+  case WM_DESTROY:
+      PostQuitMessage(0);
+      break;
 	case WM_CHAR:
 		if (wParam == 0x1B /* Escape */) {
 			DestroyWindow(hwnd);
