@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const wchar_t selectionWindowClassName[] = L"selection_window";
+const char selectionWindowClassName[] = "selection_window";
 HINSTANCE globalInstance;
 
 RECT clientRect { 0, 0, 0, 0 };
@@ -174,7 +174,7 @@ static HWND createSelectionWindow()
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-	HWND wnd = CreateWindowEx(WS_EX_TOPMOST|WS_EX_LAYERED, selectionWindowClassName, L"Selection Window", WS_POPUP, 0, 0, screenWidth, screenHeight, NULL, NULL, globalInstance, NULL);
+	HWND wnd = CreateWindowEx(WS_EX_TOPMOST|WS_EX_LAYERED, selectionWindowClassName, "Selection Window", WS_POPUP, 0, 0, screenWidth, screenHeight, NULL, NULL, globalInstance, NULL);
 	if (IsWindow(wnd)) {
 		SetLayeredWindowAttributes(wnd, selColor, 180 /* alpha 0..255 */, LWA_COLORKEY | LWA_ALPHA);
 	}
@@ -187,7 +187,7 @@ NAN_METHOD(CaptureScreen) {
 
 	// Register window class
 	if (!createWindowClass()) {
-		return -1;
+		return;
 	}
 
 	// Create brushes for drawing
