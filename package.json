@@ -17,7 +17,6 @@
     "postinstall": "./node_modules/.bin/electron-rebuild --force"
   },
   "dependencies": {
-    "menubar": "^5.2.3",
     "electron": "^1.7.3",
     "font-awesome": "^4.7.0",
     "nan": "^2.6.2"
