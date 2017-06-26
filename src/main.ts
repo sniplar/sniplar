@@ -4,17 +4,22 @@ const path = require('path');
 const url = require('url');
 const electron = require('electron');
 const {app, globalShortcut, ipcMain, BrowserWindow} = electron;
-const addon = require('./../build/Release/addon.node')
+const addon = require('./../build/Release/addon.node');
 
-let win;
+let win, screenCaptureMode = false;
+
 
 app.on('ready', () => {
   globalShortcut.register('CmdOrCtrl+Insert', () => {
-    let displays = electron.screen.getCursorScreenPoint();
-
-    console.log('X:' + displays.x + ' Y:' + displays.y);
+    if (screenCaptureMode) {
+      return;
+    }
+    screenCaptureMode = true;
+    //let displays = electron.screen.getCursorScreenPoint();
+    //console.log('X:' + displays.x + ' Y:' + displays.y);
     win.minimize();
     console.log(`screencall: ${addon.CaptureScreen()}`);
+    screenCaptureMode = false;
   });
 
   ipcMain.on('quit', function() {

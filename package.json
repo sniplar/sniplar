@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/sniplar/sniplar.git"
   },
-  "main": "src/main.js",
+  "main": "src/main.ts",
   "scripts": {
     "start": "electron-rebuild && electron .",
     "gyp": "node-gyp configure build",
