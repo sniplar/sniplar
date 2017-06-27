@@ -225,11 +225,11 @@ NAN_METHOD(CaptureScreen) {
 	// Delete brushes
 	DeleteObject(backgroundBrush);
 	DeleteObject(selectionBrush);
-        DeleteObject(frameBrush);
+    DeleteObject(frameBrush);
 }
 
 NAN_MODULE_INIT(Initialize) {
-        NAN_EXPORT(target, CaptureScreen);
+    NAN_EXPORT(target, CaptureScreen);
 }
 
 NODE_MODULE(addon, Initialize)

@@ -17,8 +17,10 @@
     "postinstall": "./node_modules/.bin/electron-rebuild --force"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "electron": "^1.7.3",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
     "nan": "^2.6.2"
   },
   "devDependencies": {

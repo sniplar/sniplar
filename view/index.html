@@ -4,20 +4,44 @@
     <meta charset="UTF-8">
     <title>Sniplar</title>
 
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/css/style.css">
   </head>
   <body>
-    <div style="float:right">
-      <a title="restart" href="javascript:restartApp()"><i class="fa fa-bug" aria-hidden="true"></i></a>
-      <a title="settings" href="javascript:alert('test')"><i class="fa fa-cog" aria-hidden="true"></i></a>
-      <a title="hide" href="javascript:quitWindow()"><i class="fa fa-times" aria-hidden="true"></i></a>
+    <div class="container-fluid menu-bar">
+        <div class="col-xs-4 col-xs-offset-4">
+            <p class="headline-sniplar text-center">Sniplar</p>
+        </div>
+        <div class="col-xs-4">
+            <div class="pull-right">
+                <a title="window-minimize" href="javascript:windowMinimize()"><i class="fa fa-window-minimize" aria-hidden="true"></i></a>
+                <a title="window-close" href="javascript:windowClose()"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
+            </div>
+        </div>
     </div>
+    <div class="container-fluid shortcut-bar">
+        <div class="col-xs-4 block">
+            Settings
+        </div>
+        <div class="col-xs-4 block">
+            Screenshot
+        </div>
+        <div class="col-xs-4 block">
+            ....
+        </div>
+    </div>
+
     <br />
+    <a title="restart" href="javascript:restartApp()"><i class="fa fa-bug" aria-hidden="true"></i></a>
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
 
-    <script type="text/javascript" src="../src/navigation.ts"></script>
-    <script type="text/javascript" src="../src/capture.ts"></script>
   </body>
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../src/navigation.ts"></script>
+  <script type="text/javascript" src="../src/capture.ts"></script>
 </html>
