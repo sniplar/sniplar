@@ -9,39 +9,43 @@
     <link rel="stylesheet" href="../public/css/style.css">
   </head>
   <body>
-    <div class="container-fluid menu-bar">
-        <div class="col-xs-4 col-xs-offset-4">
-            <p class="headline-sniplar text-center">Sniplar</p>
-        </div>
-        <div class="col-xs-4">
-            <div class="pull-right">
-                <a title="window-minimize" href="javascript:windowMinimize()"><i class="fa fa-window-minimize" aria-hidden="true"></i></a>
-                <a title="window-close" href="javascript:windowClose()"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
+    <div class="container menu-bar">
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <p class="headline-sniplar text-center">Sniplar</p>
+            </div>
+            <div class="col-xs-4">
+                <div class="pull-right">
+                    <a title="window-minimize" href="javascript:Navigation.windowMinimize()"><i class="fa fa-window-minimize" aria-hidden="true"></i></a>
+                    <a title="window-close" href="javascript:Navigation.windowClose()"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid shortcut-bar">
-        <div class="col-xs-4 block">
-            Settings
-        </div>
-        <div class="col-xs-4 block">
-            Screenshot
-        </div>
-        <div class="col-xs-4 block">
-            ....
+    <div class="container shortcut-bar">
+        <div class="row">
+            <div class="col-xs-4 block" onclick="javascript:Handler.pageContent('settings')">
+                <span class="icon fa fa-cog" aria-hidden="true"></span>
+                <span class="description">Settings</span>
+            </div>
+            <div class="col-xs-4 block">
+                <span class="icon fa fa-window-restore" aria-hidden="true"></span>
+                <span class="description">Screenshot</span>
+            </div>
+            <div class="col-xs-4 block">
+                ....
+            </div>
         </div>
     </div>
 
-    <br />
-    <a title="restart" href="javascript:restartApp()"><i class="fa fa-bug" aria-hidden="true"></i></a>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <div id="main-content" class="container-fluid"></div>
 
   </body>
   <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
   <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../src/navigation.ts"></script>
-  <script type="text/javascript" src="../src/capture.ts"></script>
+  <script type="text/javascript" src="../src/Application.ts"></script>
+  <script type="text/javascript" src="../src/content/Navigation.ts"></script>
+
+  <script type="text/javascript">Application.init()</script>
 </html>

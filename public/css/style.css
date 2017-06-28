@@ -16,15 +16,33 @@ body {
     -webkit-app-region: no-drag;
 }
 
+.menu-bar a:last-of-type {
+    margin: 0 0 0 10px;
+}
+
 .shortcut-bar {
     border-bottom: 1px solid #000;
 }
 
 .shortcut-bar .block {
-    height: 100px;
+    height: 85px;
     border-right: 1px solid #000;
+    cursor: pointer;
 }
 
 .shortcut-bar .block:last-of-type {
     border-right: 0;
+}
+
+.shortcut-bar .icon {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+    display: block;
+}
+.shortcut-bar .description {
+    display: block;
+    text-align: center;
+    word-wrap: break-word;
 }
